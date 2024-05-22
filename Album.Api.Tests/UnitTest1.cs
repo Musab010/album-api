@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 using Xunit;
-using Album.Api;
+using Album.Api.Services;
 
 namespace Album.Api
 {
