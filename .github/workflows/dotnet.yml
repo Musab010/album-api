@@ -39,7 +39,7 @@ jobs:
     - name: Build, tag and push image to Amazon ecr
       id: build-image
       env:
-        ECR_REGISTRY: 394760416698.dkr.ecr.us-east-1.amazonaws.com
+        ECR_REGISTRY: 673372960141.dkr.ecr.us-east-1.amazonaws.com
         ECR_REPOSITORY: cnsd/album
       run: |
         cd Album.Api
@@ -52,7 +52,7 @@ jobs:
       with:
        task-definition: Album.Api/task-definition.json
        container-name: AlbumContainer
-       image: 394760416698.dkr.ecr.us-east-1.amazonaws.com/cnsd/album:${{github.run_number}}
+       image: 673372960141.dkr.ecr.us-east-1.amazonaws.com/cnsd/album:${{github.run_number}}
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
