@@ -58,5 +58,5 @@ jobs:
       with:
        task-definition: ${{ steps.task-def.outputs.task-definition }}
        service: AlbumServiceBlueGreen
-       cluster: AlbumCluster
+       cluster: AlbumCluster2
        wait-for-service-stability: true
