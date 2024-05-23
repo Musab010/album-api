@@ -46,17 +46,3 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker tag $ECR_REGISTRY/$ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.run_number }}
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.run_number }}
-    - name: Fill in the new image ID in the Amazon ECS task definition
-      id: task-def
-      uses: aws-actions/amazon-ecs-render-task-definition@v1
-      with:
-       task-definition: Album.Api/task-definition.json
-       container-name: AlbumContainer
-       image: 673372960141.dkr.ecr.us-east-1.amazonaws.com/cnsd/album:${{github.run_number}}
-    - name: Deploy Amazon ECS task definition
-      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      with:
-       task-definition: ${{ steps.task-def.outputs.task-definition }}
-       service: AlbumServiceBlueGreen
-       cluster: AlbumCluster2
-       wait-for-service-stability: true
