@@ -13,7 +13,7 @@ namespace Album.Api
         {
             var gs = new GreetingService();
             string name = "Musab";
-            Assert.Equal("Hello " + name + " " + gs.greeting(name));
+            Assert.Equal("Hello ", gs.greeting(name));
         }
         
         [Fact]
