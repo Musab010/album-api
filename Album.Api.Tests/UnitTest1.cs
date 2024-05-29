@@ -13,7 +13,7 @@ namespace Album.Api
         {
             var gs = new GreetingService();
             string name = "Musab";
-            Assert.Equal("Hello " + name + " " +Dns.GetHostName(), gs.greeting(name));
+            Assert.Equal("Hello " + name + " " +Dns.GetHostName() + " v2", gs.greeting(name));
         }
         
         [Fact]
@@ -21,7 +21,7 @@ namespace Album.Api
         {
             var gs = new GreetingService();
             string name = string.Empty;
-            Assert.Equal("Hello World!", gs.greeting(name));
+            Assert.Equal("Hello World! v2", gs.greeting(name));
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Album.Api
         {
             var gs = new GreetingService();
             string name = null;
-            Assert.Equal("Hello World!", gs.greeting(name));
+            Assert.Equal("Hello World! v2", gs.greeting(name));
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace Album.Api
         {
             var gs = new GreetingService();
             string name = "";
-            Assert.Equal("Hello World!", gs.greeting(name));
+            Assert.Equal("Hello World! v2", gs.greeting(name));
         }
 
 
