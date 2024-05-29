@@ -13,7 +13,7 @@ namespace Album.Api
         {
             var gs = new GreetingService();
             string name = "Musab";
-            Assert.Equal("Hello ", gs.greeting(name));
+            Assert.Equal("Hello " + name + " " +Dns.GetHostName(), gs.greeting(name));
         }
         
         [Fact]
