@@ -4,15 +4,17 @@ namespace Album.Api.Services
 {
     public class GreetingService
     {
-        public string greeting(string name = "Musab")
+        public string greeting(string name = "")
         {
 
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            return "Hello World";
-        }
-
-        return $"Hello {name}";
+        if(string.IsNullOrEmpty(name))
+            {
+                return "Hello World! v2";
+            }
+            else
+            {
+                return $"Hello {name} {Dns.GetHostName()} v2";
+            }
 
         }
     }
