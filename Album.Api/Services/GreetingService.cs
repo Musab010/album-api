@@ -6,14 +6,14 @@ namespace Album.Api.Services
     {
         public string greeting(string name = "")
         {
-            if(string.IsNullOrEmpty(name))
-            {
-                return "Hello World!";
-            }
-            else
-            {
-                return $"Hello {name} {Dns.GetHostName()}";
-            }
+            
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return "Hello World";
+        }
+
+        return $"Hello {name}";
+
         }
     }
 }
