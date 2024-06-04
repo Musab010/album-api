@@ -31,3 +31,14 @@
 /Users/musab/Documents/GitHub/album-api/Album.Api/obj/Debug/net7.0/Album.Api.pdb
 /Users/musab/Documents/GitHub/album-api/Album.Api/obj/Debug/net7.0/Album.Api.genruntimeconfig.cache
 /Users/musab/Documents/GitHub/album-api/Album.Api/obj/Debug/net7.0/ref/Album.Api.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/task-definition.json
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Serilog.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Serilog.AspNetCore.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Serilog.Extensions.Hosting.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Serilog.Extensions.Logging.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Serilog.Formatting.Compact.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Serilog.Settings.Configuration.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Serilog.Sinks.Console.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Serilog.Sinks.Debug.dll
+/Users/musab/Documents/GitHub/album-api/Album.Api/bin/Debug/net7.0/Serilog.Sinks.File.dll
