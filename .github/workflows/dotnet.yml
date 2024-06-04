@@ -5,27 +5,33 @@ name: .NET
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 7.0.x
+
     - name: Restore dependencies
       run: dotnet restore
+
     - name: Build
       run: dotnet build --no-restore
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -33,26 +39,30 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: us-east-1
+
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-    - name: Build, tag and push image to Amazon ecr
+
+    - name: Build, tag and push image to Amazon ECR
       id: build-image
       env:
         ECR_REGISTRY: 673372960141.dkr.ecr.us-east-1.amazonaws.com
         ECR_REPOSITORY: cnsd/album
       run: |
-        cd Album.Api
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker tag $ECR_REGISTRY/$ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.run_number }}
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.run_number }}
+
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: Album.Api/task-definition.json
+        task-definition: task-definition.json
         container-name: AlbumContainer
-        image: 673372960141.dkr.ecr.us-east-1.amazonaws.com/cnsd/album:${{github.run_number}}
+        image: 673372960141.dkr.ecr.us-east-1.amazonaws.com/cnsd/album:${{ github.run_number }}
+
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
