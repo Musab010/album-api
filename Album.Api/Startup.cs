@@ -1,20 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Album.Api.Models;
 using Album.Api.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Album.Api
 {
@@ -30,19 +22,26 @@ namespace Album.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Album.Api", Version = "v1" });
             });
-            services.AddCors();
-            services.AddScoped<Album.Api.Services.GreetingService>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
+            services.AddScoped<GreetingService>();
             services.AddScoped<IAlbumService, AlbumService>();
             services.AddHealthChecks();
             services.AddDbContext<AlbumContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("albumApiDatabase")));
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,11 +58,9 @@ namespace Album.Api
 
             app.UseRouting();
 
+            app.UseCors("AllowAllOrigins");
+
             app.UseAuthorization();
-            app.UseCors(policy => policy
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
